@@ -7,6 +7,20 @@
     'n c';
 
   grid-template-columns: 1fr 4fr;
-  grid-template-rows: 1fr 6fr;
+  grid-template-rows: 80px 1fr;
   gap: 5px;
+}
+
+.app-wrapper-content {
+  grid-area: c;
+  background-color: #e6edff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
 }

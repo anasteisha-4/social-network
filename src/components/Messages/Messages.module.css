@@ -1,0 +1,53 @@
+.content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 10px;
+  align-items: stretch;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.users {
+  background-color: aliceblue;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  border-bottom: 1px solid darkblue;
+}
+
+.user img {
+  width: 30px;
+  border-radius: 50px;
+}
+
+.user.active {
+  color: darkblue;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.message {
+  font-size: 12px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid darkblue;
+  padding: 10px;
+  border-radius: 15px;
+  width: fit-content;
+}
+
+.message.left {
+  align-self: flex-start;
+}
+
+.message.right {
+  align-self: flex-end;
+}
