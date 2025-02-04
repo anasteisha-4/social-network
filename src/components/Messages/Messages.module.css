@@ -11,23 +11,6 @@
   background-color: aliceblue;
 }
 
-.user {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 10px;
-  border-bottom: 1px solid darkblue;
-}
-
-.user img {
-  width: 30px;
-  border-radius: 50px;
-}
-
-.user.active {
-  color: darkblue;
-}
-
 .messages {
   display: flex;
   flex-direction: column;

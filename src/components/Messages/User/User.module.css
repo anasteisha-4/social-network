@@ -1,0 +1,17 @@
+.user {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px;
+  border-bottom: 1px solid darkblue;
+}
+
+.user img {
+  width: 30px;
+  border-radius: 50px;
+}
+
+.user.active {
+  color: darkblue;
+  background-color: rgba(180, 200, 255, 0.725);
+}

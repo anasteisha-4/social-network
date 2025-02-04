@@ -1,50 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Message from './Message/Message';
 import s from './Messages.module.css';
+import User from './User/User';
 
-const User = (props) => {
-  const setActiveClassName = (navData) =>
-    s.user + (navData.isActive ? ' ' + s.active : '');
-  return (
-    <NavLink to={`/messages/${props.id}`} className={setActiveClassName}>
-      <img
-        src="https://smartprogress.do/uploadImages/001832188.jpg"
-        alt="cat programmer"
-      />
-      {props.name}
-    </NavLink>
-  );
-};
-
-const Message = (props) => {
-  return (
-    <div
-      className={
-        s.message + ' ' + (props.position === 'right' ? s.right : s.left)
-      }
-    >
-      {props.children}
-    </div>
-  );
-};
-
-const Messages = (props) => {
+export default function Messages(props) {
   return (
     <div className={s.content}>
       <div className={s.users}>
-        <User name="Anastasia" id="1" active />
-        <User name="Bogdan" id="2" />
-        <User name="Polly" id="3" />
+        {props.users.map((obj, key) => (
+          <User name={obj.name} id={obj.id} key={key} />
+        ))}
       </div>
       <div className={s.messages}>
-        <Message position="left">Привет! Как дела? </Message>
-        <Message position="right">
-          Здравствуй! Я учу React, уже на 21 уроке
-        </Message>
-        <Message position="left">Ничего себе! Молодец)</Message>
+        {props.messages.map((obj, key) => (
+          <Message position={obj.from === 'me' ? 'right' : 'left'} key={key}>
+            {obj.text}
+          </Message>
+        ))}
       </div>
     </div>
   );
-};
-
-export default Messages;
+}
