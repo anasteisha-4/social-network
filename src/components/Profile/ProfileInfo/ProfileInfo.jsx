@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 
 export default function ProfileInfo(props) {
   return (
-    <div>
+    <>
       <div>
         <img
           className={s.background}
@@ -12,6 +12,6 @@ export default function ProfileInfo(props) {
         />
       </div>
       <div className={s.descriptionBlock}>avatar + descr</div>
-    </div>
+    </>
   );
 }

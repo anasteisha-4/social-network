@@ -17,12 +17,13 @@ function App(props) {
         <Navbar />
         <div className="app-wrapper-content">
           <Routes>
-            <Route path="/profile" element={<Profile posts={props.posts} />} />
+            <Route
+              path="/profile"
+              element={<Profile state={props.state.profilePage} />}
+            />
             <Route
               path="/messages/*"
-              element={
-                <Messages users={props.users} messages={props.messages} />
-              }
+              element={<Messages state={props.state.messagesPage} />}
             />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />

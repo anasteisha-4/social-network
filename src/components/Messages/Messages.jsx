@@ -7,12 +7,12 @@ export default function Messages(props) {
   return (
     <div className={s.content}>
       <div className={s.users}>
-        {props.users.map((obj, key) => (
+        {props.state.users.map((obj, key) => (
           <User name={obj.name} id={obj.id} key={key} />
         ))}
       </div>
       <div className={s.messages}>
-        {props.messages.map((obj, key) => (
+        {props.state.messages.map((obj, key) => (
           <Message position={obj.from === 'me' ? 'right' : 'left'} key={key}>
             {obj.text}
           </Message>
