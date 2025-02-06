@@ -4,7 +4,9 @@
   border: 1px solid darkblue;
   padding: 10px;
   border-radius: 15px;
+  max-width: 500px;
   width: fit-content;
+  word-break: break-word;
 }
 
 .message.left {

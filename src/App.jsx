@@ -4,26 +4,38 @@ import './App.css';
 import Header from './components/Header/Header';
 import Messages from './components/Messages/Messages';
 import Music from './components/Music/Music';
-import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
+import Sidebar from './components/Sidebar/Sidebar';
 
 function App(props) {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Navbar />
+        <Sidebar state={props.state.sidebarPage} />
         <div className="app-wrapper-content">
           <Routes>
             <Route
               path="/profile"
-              element={<Profile state={props.state.profilePage} />}
+              element={
+                <Profile
+                  state={props.state.profilePage}
+                  addPost={props.addPost}
+                  updateNewPostText={props.updateNewPostText}
+                />
+              }
             />
             <Route
               path="/messages/*"
-              element={<Messages state={props.state.messagesPage} />}
+              element={
+                <Messages
+                  state={props.state.messagesPage}
+                  sendMessage={props.sendMessage}
+                  updateNewMessageText={props.updateNewMessageText}
+                />
+              }
             />
             <Route path="/news" element={<News />} />
             <Route path="/music" element={<Music />} />

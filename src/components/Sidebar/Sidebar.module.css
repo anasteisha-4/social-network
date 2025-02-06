@@ -1,0 +1,9 @@
+.side {
+  grid-area: s;
+  background-color: darkblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+}

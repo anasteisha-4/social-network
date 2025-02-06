@@ -4,7 +4,7 @@
   margin: 0 auto;
   grid-template-areas:
     'h h'
-    'n c';
+    's c';
 
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 80px 1fr;
@@ -23,4 +23,29 @@ a {
 
 a:visited {
   color: inherit;
+}
+
+textarea {
+  display: block;
+  padding: 10px;
+  resize: none;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+}
+
+button {
+  display: block;
+  align-self: flex-end;
+  padding: 10px;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+}
+
+button:hover {
+  cursor: pointer;
+  color: darkblue;
+  background-color: white;
 }

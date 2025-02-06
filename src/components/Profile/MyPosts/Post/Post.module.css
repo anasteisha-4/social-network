@@ -5,4 +5,7 @@
 
 .item span {
   display: block;
+  max-width: 100%;
+  width: fit-content;
+  word-break: break-word;
 }
