@@ -7,11 +7,14 @@ export default function Messages(props) {
   const newMessageElement = React.createRef();
 
   const sendMessage = () => {
-    props.sendMessage();
+    props.dispatch({ type: 'SEND-MESSAGE' });
   };
 
   const updateNewMessageText = () => {
-    props.updateNewMessageText(newMessageElement.current.value);
+    props.dispatch({
+      type: 'UPDATE-NEW-MESSAGE-TEXT',
+      text: newMessageElement.current.value
+    });
   };
 
   return (

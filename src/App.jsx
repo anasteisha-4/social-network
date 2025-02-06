@@ -14,18 +14,15 @@ function App(props) {
     <BrowserRouter>
       <div className="app-wrapper">
         <Header />
-        <Sidebar state={props.store.state.sidebarPage} />
+        <Sidebar state={props.state.sidebarPage} />
         <div className="app-wrapper-content">
           <Routes>
             <Route
               path="/profile"
               element={
                 <Profile
-                  state={props.store.state.profilePage}
-                  addPost={props.store.addPost.bind(props.store)}
-                  updateNewPostText={props.store.updateNewPostText.bind(
-                    props.store
-                  )}
+                  state={props.state.profilePage}
+                  dispatch={props.dispatch}
                 />
               }
             />
@@ -33,11 +30,8 @@ function App(props) {
               path="/messages/*"
               element={
                 <Messages
-                  state={props.store.state.messagesPage}
-                  sendMessage={props.store.sendMessage.bind(props.store)}
-                  updateNewMessageText={props.store.updateNewMessageText.bind(
-                    props.store
-                  )}
+                  state={props.state.messagesPage}
+                  dispatch={props.dispatch}
                 />
               }
             />

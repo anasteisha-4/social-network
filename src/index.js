@@ -8,15 +8,15 @@ import './index.css';
 import store from './redux/state';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const render = (store) => {
+const render = (state) => {
   root.render(
     <React.StrictMode>
-      <App store={store} />
+      <App state={state} dispatch={store.dispatch.bind(store)} />
     </React.StrictMode>
   );
 };
 
-render(store);
+render(store.state);
 store.subscribe(render);
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -92,7 +92,11 @@ const store = {
     alert('I do nothing');
   },
 
-  addPost() {
+  get state() {
+    return this._state;
+  },
+
+  _addPost() {
     const newPost = {
       id: Math.max(...this._state.profilePage.posts.map((obj) => obj.id)) + 1,
       text: this._state.profilePage.newPostText,
@@ -100,15 +104,15 @@ const store = {
     };
     this._state.profilePage.posts.push(newPost);
     this._state.profilePage.newPostText = '';
-    this._callSubscriber(this);
+    this._callSubscriber(this._state);
   },
 
-  updateNewPostText(postText) {
+  _updateNewPostText(postText) {
     this._state.profilePage.newPostText = postText;
-    this._callSubscriber(this);
+    this._callSubscriber(this._state);
   },
 
-  sendMessage() {
+  _sendMessage() {
     const newMessage = {
       id:
         Math.max(...this._state.messagesPage.messages.map((obj) => obj.id)) + 1,
@@ -117,20 +121,28 @@ const store = {
     };
     this._state.messagesPage.messages.push(newMessage);
     this._state.messagesPage.newMessageText = '';
-    this._callSubscriber(this);
+    this._callSubscriber(this._state);
   },
 
-  updateNewMessageText(messageText) {
+  _updateNewMessageText(messageText) {
     this._state.messagesPage.newMessageText = messageText;
-    this._callSubscriber(this);
+    this._callSubscriber(this._state);
   },
 
   subscribe(observer) {
     this._callSubscriber = observer;
   },
 
-  get state() {
-    return this._state;
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      this._addPost();
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._updateNewPostText(action.text);
+    } else if (action.type === 'SEND-MESSAGE') {
+      this._sendMessage();
+    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+      this._updateNewMessageText(action.text);
+    }
   }
 };
 
