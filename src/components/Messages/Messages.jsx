@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  sendMessageActionCreator,
+  updateNewMessageTextActionCreator
+} from '../../redux/state';
 import Message from './Message/Message';
 import s from './Messages.module.css';
 import User from './User/User';
@@ -7,14 +11,13 @@ export default function Messages(props) {
   const newMessageElement = React.createRef();
 
   const sendMessage = () => {
-    props.dispatch({ type: 'SEND-MESSAGE' });
+    props.dispatch(sendMessageActionCreator());
   };
 
   const updateNewMessageText = () => {
-    props.dispatch({
-      type: 'UPDATE-NEW-MESSAGE-TEXT',
-      text: newMessageElement.current.value
-    });
+    props.dispatch(
+      updateNewMessageTextActionCreator(newMessageElement.current.value)
+    );
   };
 
   return (
