@@ -1,23 +1,20 @@
 import React from 'react';
+
 import {
   sendMessageActionCreator,
   updateNewMessageTextActionCreator
-} from '../../redux/state';
+} from '../../redux/reducerMessages';
 import Message from './Message/Message';
 import s from './Messages.module.css';
 import User from './User/User';
 
 export default function Messages(props) {
-  const newMessageElement = React.createRef();
-
   const sendMessage = () => {
     props.dispatch(sendMessageActionCreator());
   };
 
-  const updateNewMessageText = () => {
-    props.dispatch(
-      updateNewMessageTextActionCreator(newMessageElement.current.value)
-    );
+  const updateNewMessageText = (event) => {
+    props.dispatch(updateNewMessageTextActionCreator(event.target.value));
   };
 
   return (
@@ -36,7 +33,6 @@ export default function Messages(props) {
           ))}
         </div>
         <textarea
-          ref={newMessageElement}
           value={props.state.newMessageText}
           onChange={updateNewMessageText}
         ></textarea>

@@ -2,11 +2,8 @@ import avatar1 from '../images/1.jpg';
 import avatar2 from '../images/2.jpg';
 import avatar3 from '../images/3.jpg';
 import avatar5 from '../images/5.jpg';
-
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import reducerMessages from './reducerMessages';
+import reducerProfile from './reducerProfile';
 
 const store = {
   _state: {
@@ -101,68 +98,18 @@ const store = {
     return this._state;
   },
 
-  _addPost() {
-    const newPost = {
-      id: Math.max(...this._state.profilePage.posts.map((obj) => obj.id)) + 1,
-      text: this._state.profilePage.newPostText,
-      likesCount: 0
-    };
-    this._state.profilePage.posts.push(newPost);
-    this._state.profilePage.newPostText = '';
-    this._callSubscriber(this._state);
-  },
-
-  _updateNewPostText(postText) {
-    this._state.profilePage.newPostText = postText;
-    this._callSubscriber(this._state);
-  },
-
-  _sendMessage() {
-    const newMessage = {
-      id:
-        Math.max(...this._state.messagesPage.messages.map((obj) => obj.id)) + 1,
-      text: this._state.messagesPage.newMessageText,
-      from: 'me'
-    };
-    this._state.messagesPage.messages.push(newMessage);
-    this._state.messagesPage.newMessageText = '';
-    this._callSubscriber(this._state);
-  },
-
-  _updateNewMessageText(messageText) {
-    this._state.messagesPage.newMessageText = messageText;
-    this._callSubscriber(this._state);
-  },
-
   subscribe(observer) {
     this._callSubscriber = observer;
   },
 
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      this._addPost();
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._updateNewPostText(action.text);
-    } else if (action.type === SEND_MESSAGE) {
-      this._sendMessage();
-    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-      this._updateNewMessageText(action.text);
-    }
+    this._state.profilePage = reducerProfile(this._state.profilePage, action);
+    this._state.messagesPage = reducerMessages(
+      this._state.messagesPage,
+      action
+    );
+    this._callSubscriber(this._state);
   }
 };
-
-export const addPostActionCreator = () => ({ type: ADD_POST });
-
-export const updateNewPostTextActionCreator = (text) => ({
-  type: UPDATE_NEW_POST_TEXT,
-  text
-});
-
-export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
-
-export const updateNewMessageTextActionCreator = (text) => ({
-  type: UPDATE_NEW_MESSAGE_TEXT,
-  text
-});
 
 export default store;
