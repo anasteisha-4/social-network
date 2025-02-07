@@ -2,8 +2,9 @@ import avatar1 from '../images/1.jpg';
 import avatar2 from '../images/2.jpg';
 import avatar3 from '../images/3.jpg';
 import avatar5 from '../images/5.jpg';
-import reducerMessages from './reducerMessages';
-import reducerProfile from './reducerProfile';
+import messagesReducer from './messagesReducer';
+import profileReducer from './profileReducer';
+import sidebarReducer from './sidebarReducer';
 
 const store = {
   _state: {
@@ -37,12 +38,7 @@ const store = {
 
       messages: [
         { id: 1, text: 'Доброе утро ❤️', from: 'user' },
-        { id: 2, text: 'Доброе утро ❤️', from: 'me' },
-        {
-          id: 3,
-          text: 'Сука Как сделать чтобы в тик токи не было видно видео',
-          from: 'user'
-        }
+        { id: 2, text: 'Доброе утро ❤️', from: 'me' }
       ],
 
       newMessageText: ''
@@ -103,11 +99,12 @@ const store = {
   },
 
   dispatch(action) {
-    this._state.profilePage = reducerProfile(this._state.profilePage, action);
-    this._state.messagesPage = reducerMessages(
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.messagesPage = messagesReducer(
       this._state.messagesPage,
       action
     );
+    this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action);
     this._callSubscriber(this._state);
   }
 };

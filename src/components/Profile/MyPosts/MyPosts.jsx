@@ -1,19 +1,16 @@
 import React from 'react';
 
-import {
-  addPostActionCreator,
-  updateNewPostTextActionCreator
-} from '../../../redux/reducerProfile';
+import { addPostActionCreator } from '../../../redux/profileReducer';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 export default function MyPosts(props) {
   const addPost = () => {
-    props.dispatch(addPostActionCreator());
+    props.addPost();
   };
 
   const updateNewPostText = (event) => {
-    props.dispatch(updateNewPostTextActionCreator(event.target.value));
+    props.updateNewPostText(event.target.value);
   };
 
   return (
