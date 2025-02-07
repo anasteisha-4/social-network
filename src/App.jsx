@@ -7,13 +7,13 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
-import Sidebar from './components/Sidebar/Sidebar';
+import SidebarContainer from './components/Sidebar/SidebarContainer';
 
 function App(props) {
   return (
     <div className="app-wrapper">
       <Header />
-      <Sidebar />
+      <SidebarContainer />
       <div className="app-wrapper-content">
         <Routes>
           <Route path="/profile" element={<Profile />} />

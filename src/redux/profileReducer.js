@@ -30,21 +30,26 @@ const initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
-  const newState = structuredClone(state);
   switch (action.type) {
     case ADD_POST:
-      newState.posts.push({
-        id: Math.max(...newState.posts.map((obj) => obj.id)) + 1,
-        text: newState.newPostText,
-        likesCount: 0
-      });
-      newState.newPostText = '';
-      return newState;
+      return {
+        posts: [
+          ...state.posts,
+          {
+            id: Math.max(...state.posts.map((obj) => obj.id)) + 1,
+            text: state.newPostText,
+            likesCount: 0
+          }
+        ],
+        newPostText: ''
+      };
     case UPDATE_NEW_POST_TEXT:
-      newState.newPostText = action.text;
-      return newState;
+      return {
+        ...state,
+        newPostText: action.text
+      };
     default:
-      return newState;
+      return state;
   }
 };
 

@@ -24,21 +24,27 @@ const initialState = {
 };
 
 const messagesReducer = (state = initialState, action) => {
-  const newState = structuredClone(state);
   switch (action.type) {
     case SEND_MESSAGE:
-      newState.messages.push({
-        id: Math.max(...newState.messages.map((obj) => obj.id)) + 1,
-        text: newState.newMessageText,
-        from: 'me'
-      });
-      newState.newMessageText = '';
-      return newState;
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          {
+            id: Math.max(...state.messages.map((obj) => obj.id)) + 1,
+            text: state.newMessageText,
+            from: 'me'
+          }
+        ],
+        newMessageText: ''
+      };
     case UPDATE_NEW_MESSAGE_TEXT:
-      newState.newMessageText = action.text;
-      return newState;
+      return {
+        ...state,
+        newMessageText: action.text
+      };
     default:
-      return newState;
+      return state;
   }
 };
 

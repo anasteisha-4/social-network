@@ -45,8 +45,7 @@ const initialState = {
 };
 
 const sidebarReducer = (state = initialState, action) => {
-  const newState = structuredClone(state);
-  return newState;
+  return state;
 };
 
 export default sidebarReducer;
