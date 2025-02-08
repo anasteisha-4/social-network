@@ -40,13 +40,29 @@
 .item p {
   padding: 0;
   margin: 0;
+  word-wrap: break-word;
+  max-width: 144px;
 }
 
 .status {
   color: darkblue;
   font-size: 0.8em;
+  max-width: 200px;
 }
 
 .location {
   font-size: 0.8em;
+}
+
+.pages {
+  display: flex;
+  gap: 5px;
+}
+
+.pages > .active {
+  font-weight: bold;
+}
+
+.pages > div {
+  cursor: pointer;
 }
