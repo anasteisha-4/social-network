@@ -35,7 +35,6 @@ textarea {
 
 button {
   display: block;
-  align-self: flex-end;
   padding: 10px;
   background-color: darkblue;
   color: white;
