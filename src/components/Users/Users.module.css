@@ -32,6 +32,10 @@
   gap: 10px;
 }
 
+.item button {
+  width: 6em;
+}
+
 .item h4,
 .item p {
   padding: 0;
