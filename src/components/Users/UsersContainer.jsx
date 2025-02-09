@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   followAC,
@@ -41,6 +42,53 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+const UsersContainer = (props) => {
+  const [initialized, setInitialized] = useState(false);
 
-export default UsersContainer;
+  useEffect(() => {
+    if (!initialized) {
+      props.setCurrentPage(1);
+      setInitialized(true);
+    }
+  }, [initialized]);
+
+  useEffect(() => {
+    if (initialized) {
+      fetch(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
+      )
+        .then((response) => response.json())
+        .then((value) => {
+          props.setUsers(value.items);
+          props.setTotalUsersCount(value.totalCount);
+        })
+        .catch((error) => alert(error));
+    }
+  }, [initialized]);
+
+  const changePage = (page) => {
+    fetch(
+      `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`
+    )
+      .then((response) => response.json())
+      .then((value) => {
+        props.setUsers(value.items);
+        props.setCurrentPage(page);
+      })
+      .catch((error) => alert(error));
+  };
+
+  return (
+    <Users
+      totalUsersCount={props.totalUsersCount}
+      currentPage={props.currentPage}
+      pageSize={props.pageSize}
+      users={props.users}
+      follow={props.follow}
+      unfollow={props.unfollow}
+      changePage={changePage}
+    />
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

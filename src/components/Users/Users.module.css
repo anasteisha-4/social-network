@@ -1,5 +1,5 @@
 .content {
-  padding: 10px;
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
   gap: 70px;
@@ -72,9 +72,12 @@
   text-align: center;
   width: 20px;
   padding: 10px;
+  border-radius: 3px;
+}
+
+.pages > div:not(.disabled):not(.current) {
   background-color: rgb(195, 216, 255);
   color: darkblue;
-  border-radius: 3px;
 }
 
 .pages > .current {
@@ -90,5 +93,6 @@
 }
 
 .disabled {
-  opacity: 0.5;
+  background-color: rgb(193, 203, 226);
+  color: rgb(73, 74, 100);
 }

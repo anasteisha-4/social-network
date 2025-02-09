@@ -1,31 +1,9 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import defaultAvatar from '../../images/default.jpg';
 import s from './Users.module.css';
 
 export default function Users(props) {
-  const [initialized, setInitialized] = useState(false);
-
-  useEffect(() => {
-    if (!initialized) {
-      props.setCurrentPage(1);
-      setInitialized(true);
-    }
-  }, [initialized]);
-
-  useEffect(() => {
-    if (initialized) {
-      fetch(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
-      )
-        .then((response) => response.json())
-        .then((value) => {
-          props.setUsers(value.items);
-          props.setTotalUsersCount(value.totalCount);
-        })
-        .catch((error) => alert(error));
-    }
-  }, [initialized]);
-
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
   const startPage = Math.max(1, props.currentPage - 2);
@@ -37,27 +15,19 @@ export default function Users(props) {
 
   const changePage = (page) => {
     if (page >= 1 && page <= pagesCount) {
-      fetch(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`
-      )
-        .then((response) => response.json())
-        .then((value) => {
-          props.setUsers(value.items);
-          props.setCurrentPage(page);
-        })
-        .catch((error) => alert(error));
+      props.changePage(page);
     }
   };
 
   const incrementPage = () => {
     if (props.currentPage < pagesCount) {
-      changePage(props.currentPage + 1);
+      props.changePage(props.currentPage + 1);
     }
   };
 
   const decrementPage = () => {
     if (props.currentPage > 1) {
-      changePage(props.currentPage - 1);
+      props.changePage(props.currentPage - 1);
     }
   };
 
