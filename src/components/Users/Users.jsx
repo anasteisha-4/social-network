@@ -4,6 +4,7 @@ import s from './Users.module.css';
 
 export default function Users(props) {
   useEffect(() => {
+    props.setCurrentPage(1);
     fetch(
       `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
     )
@@ -15,37 +16,68 @@ export default function Users(props) {
       .catch((error) => alert(error));
   }, []);
 
-  // const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  const pagesCount = 20;
+  const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
+  const startPage = Math.max(1, props.currentPage - 2);
+  const endPage = Math.min(pagesCount, startPage + 4);
 
-  const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
 
   const changePage = (page) => {
-    fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`
-    )
-      .then((response) => response.json())
-      .then((value) => {
-        props.setUsers(value.items);
-        props.setCurrentPage(page);
-      })
-      .catch((error) => alert(error));
+    if (page >= 1 && page <= pagesCount) {
+      fetch(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`
+      )
+        .then((response) => response.json())
+        .then((value) => {
+          props.setUsers(value.items);
+          props.setCurrentPage(page);
+        })
+        .catch((error) => alert(error));
+    }
+  };
+
+  const incrementPage = () => {
+    if (props.currentPage < pagesCount) {
+      changePage(props.currentPage + 1);
+    }
+  };
+
+  const decrementPage = () => {
+    if (props.currentPage > 1) {
+      changePage(props.currentPage - 1);
+    }
   };
 
   return (
-    <>
+    <div className={s.content}>
       <div className={s.pages}>
+        <div
+          onClick={decrementPage}
+          className={props.currentPage > 1 || s.disabled}
+        >
+          {'<'}
+        </div>
         {pages.map((page) => (
           <div
             key={page}
-            className={page === props.currentPage ? s.active : ''}
+            className={page === props.currentPage ? s.current : ''}
             onClick={() => changePage(page)}
           >
             {page}
           </div>
         ))}
+        <div
+          onClick={incrementPage}
+          className={props.currentPage < pagesCount || s.disabled}
+        >
+          {'>'}
+        </div>
       </div>
-      <div className={s.content}>
+
+      <div className={s.users}>
         {props.users.map((user) => (
           <div className={s.item} key={user.id}>
             <div>
@@ -74,6 +106,6 @@ export default function Users(props) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

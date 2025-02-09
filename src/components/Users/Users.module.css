@@ -1,5 +1,11 @@
 .content {
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 70px;
+}
+
+.users {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   row-gap: 70px;
@@ -55,14 +61,34 @@
 }
 
 .pages {
+  align-self: center;
   display: flex;
   gap: 5px;
 }
 
-.pages > .active {
-  font-weight: bold;
+.pages > div {
+  user-select: none;
+  /* border: 1px solid darkblue; */
+  text-align: center;
+  width: 20px;
+  padding: 10px;
+  background-color: rgb(195, 216, 255);
+  color: darkblue;
+  border-radius: 3px;
 }
 
-.pages > div {
+.pages > .current {
   cursor: pointer;
+  color: white;
+  background-color: darkblue;
+}
+
+.pages > div:not(.disabled):not(.current):hover {
+  cursor: pointer;
+  color: white;
+  background-color: cornflowerblue;
+}
+
+.disabled {
+  opacity: 0.5;
 }
