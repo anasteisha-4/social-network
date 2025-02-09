@@ -1,20 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import defaultAvatar from '../../images/default.jpg';
 import s from './Users.module.css';
 
 export default function Users(props) {
+  const [initialized, setInitialized] = useState(false);
+
   useEffect(() => {
-    props.setCurrentPage(1);
-    fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
-    )
-      .then((response) => response.json())
-      .then((value) => {
-        props.setUsers(value.items);
-        props.setTotalUsersCount(value.totalCount);
-      })
-      .catch((error) => alert(error));
-  }, []);
+    if (!initialized) {
+      props.setCurrentPage(1);
+      setInitialized(true);
+    }
+  }, [initialized]);
+
+  useEffect(() => {
+    if (initialized) {
+      fetch(
+        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
+      )
+        .then((response) => response.json())
+        .then((value) => {
+          props.setUsers(value.items);
+          props.setTotalUsersCount(value.totalCount);
+        })
+        .catch((error) => alert(error));
+    }
+  }, [initialized]);
 
   const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
