@@ -5,8 +5,10 @@ import {
   setCurrentPageAC,
   setTotalUsersCountAC,
   setUsersAC,
+  toggleIsFetchingAC,
   unfollowAC
 } from '../../redux/usersReduces';
+import Preloader from '../Preloader/Preloader';
 import Users from './Users';
 
 const mapStateToProps = (state) => {
@@ -14,7 +16,8 @@ const mapStateToProps = (state) => {
     users: state.users.users,
     pageSize: state.users.pageSize,
     totalUsersCount: state.users.totalUsersCount,
-    currentPage: state.users.currentPage
+    currentPage: state.users.currentPage,
+    isFetching: state.users.isFetching
   };
 };
 
@@ -38,6 +41,10 @@ const mapDispatchToProps = (dispatch) => {
 
     setCurrentPage(currentPage) {
       dispatch(setCurrentPageAC(currentPage));
+    },
+
+    toggleIsFetching(isFetching) {
+      dispatch(toggleIsFetchingAC(isFetching));
     }
   };
 };
@@ -54,6 +61,7 @@ const UsersContainer = (props) => {
 
   useEffect(() => {
     if (initialized) {
+      props.toggleIsFetching(true);
       fetch(
         `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
       )
@@ -61,12 +69,14 @@ const UsersContainer = (props) => {
         .then((value) => {
           props.setUsers(value.items);
           props.setTotalUsersCount(value.totalCount);
+          props.toggleIsFetching(false);
         })
         .catch((error) => alert(error));
     }
   }, [initialized]);
 
   const changePage = (page) => {
+    props.toggleIsFetching(true);
     fetch(
       `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`
     )
@@ -74,11 +84,14 @@ const UsersContainer = (props) => {
       .then((value) => {
         props.setUsers(value.items);
         props.setCurrentPage(page);
+        props.toggleIsFetching(false);
       })
       .catch((error) => alert(error));
   };
 
-  return (
+  return props.isFetching ? (
+    <Preloader />
+  ) : (
     <Users
       totalUsersCount={props.totalUsersCount}
       currentPage={props.currentPage}

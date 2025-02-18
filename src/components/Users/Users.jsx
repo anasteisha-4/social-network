@@ -34,12 +34,15 @@ export default function Users(props) {
   return (
     <div className={s.content}>
       <div className={s.pages}>
-        <div
-          onClick={decrementPage}
-          className={props.currentPage > 1 || s.disabled}
-        >
-          {'<'}
-        </div>
+        {pages.length !== 0 && (
+          <div
+            onClick={decrementPage}
+            className={props.currentPage > 1 || s.disabled}
+          >
+            {'<'}
+          </div>
+        )}
+
         {pages.map((page) => (
           <div
             key={page}
@@ -49,12 +52,14 @@ export default function Users(props) {
             {page}
           </div>
         ))}
-        <div
-          onClick={incrementPage}
-          className={props.currentPage < pagesCount || s.disabled}
-        >
-          {'>'}
-        </div>
+        {pages.length !== 0 && (
+          <div
+            onClick={incrementPage}
+            className={props.currentPage < pagesCount || s.disabled}
+          >
+            {'>'}
+          </div>
+        )}
       </div>
 
       <div className={s.users}>
