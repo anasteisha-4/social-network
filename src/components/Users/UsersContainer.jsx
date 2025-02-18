@@ -1,53 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  followAC,
-  setCurrentPageAC,
-  setTotalUsersCountAC,
-  setUsersAC,
-  toggleIsFetchingAC,
-  unfollowAC
+  follow,
+  setCurrentPage,
+  setTotalUsersCount,
+  setUsers,
+  toggleIsFetching,
+  unfollow
 } from '../../redux/usersReduces';
 import Preloader from '../Preloader/Preloader';
 import Users from './Users';
-
-const mapStateToProps = (state) => {
-  return {
-    users: state.users.users,
-    pageSize: state.users.pageSize,
-    totalUsersCount: state.users.totalUsersCount,
-    currentPage: state.users.currentPage,
-    isFetching: state.users.isFetching
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    follow(userId) {
-      dispatch(followAC(userId));
-    },
-
-    unfollow(userId) {
-      dispatch(unfollowAC(userId));
-    },
-
-    setUsers(users) {
-      dispatch(setUsersAC(users));
-    },
-
-    setTotalUsersCount(totalUsersCount) {
-      dispatch(setTotalUsersCountAC(totalUsersCount));
-    },
-
-    setCurrentPage(currentPage) {
-      dispatch(setCurrentPageAC(currentPage));
-    },
-
-    toggleIsFetching(isFetching) {
-      dispatch(toggleIsFetchingAC(isFetching));
-    }
-  };
-};
 
 const UsersContainer = (props) => {
   const [initialized, setInitialized] = useState(false);
@@ -104,4 +66,21 @@ const UsersContainer = (props) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+const mapStateToProps = (state) => {
+  return {
+    users: state.users.users,
+    pageSize: state.users.pageSize,
+    totalUsersCount: state.users.totalUsersCount,
+    currentPage: state.users.currentPage,
+    isFetching: state.users.isFetching
+  };
+};
+
+export default connect(mapStateToProps, {
+  follow,
+  unfollow,
+  setUsers,
+  setTotalUsersCount,
+  setCurrentPage,
+  toggleIsFetching
+})(UsersContainer);
