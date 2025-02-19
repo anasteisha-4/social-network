@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import defaultAvatar from '../../images/default.jpg';
 import s from './Users.module.css';
 
@@ -66,10 +67,12 @@ export default function Users(props) {
         {props.users.map((user) => (
           <div className={s.item} key={user.id}>
             <div>
-              <img
-                src={user.photos.large ?? user.photos.small ?? defaultAvatar}
-                alt="avatar"
-              />
+              <NavLink to={`/profile/${user.id}`}>
+                <img
+                  src={user.photos.large ?? user.photos.small ?? defaultAvatar}
+                  alt="avatar"
+                />
+              </NavLink>
               {user.followed ? (
                 <button onClick={() => props.unfollow(user.id)}>
                   Unfollow

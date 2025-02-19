@@ -1,3 +1,10 @@
+.textInfo > p,
+.textInfo > h1,
+.contacts > h4 {
+  padding: 0;
+  margin: 0;
+}
+
 .background {
   width: 100%;
   height: 250px;
@@ -6,4 +13,40 @@
 
 .descriptionBlock {
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  align-items: center;
+}
+
+.descriptionBlock > img {
+  width: 600px;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.textInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.textInfo > h1 {
+  font-size: 2rem;
+}
+
+.textInfo > p {
+  color: darkblue;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contacts > h4 {
+  font-size: 1.3rem;
+  padding-bottom: 10px;
 }
