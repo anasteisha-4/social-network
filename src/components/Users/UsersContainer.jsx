@@ -25,7 +25,10 @@ const UsersContainer = (props) => {
     if (initialized) {
       props.toggleIsFetching(true);
       fetch(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`
+        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`,
+        {
+          credentials: 'include'
+        }
       )
         .then((response) => response.json())
         .then((value) => {
@@ -40,7 +43,10 @@ const UsersContainer = (props) => {
   const changePage = (page) => {
     props.toggleIsFetching(true);
     fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`
+      `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`,
+      {
+        credentials: 'include'
+      }
     )
       .then((response) => response.json())
       .then((value) => {
@@ -54,15 +60,7 @@ const UsersContainer = (props) => {
   return props.isFetching ? (
     <Preloader />
   ) : (
-    <Users
-      totalUsersCount={props.totalUsersCount}
-      currentPage={props.currentPage}
-      pageSize={props.pageSize}
-      users={props.users}
-      follow={props.follow}
-      unfollow={props.unfollow}
-      changePage={changePage}
-    />
+    <Users {...props} changePage={changePage} />
   );
 };
 

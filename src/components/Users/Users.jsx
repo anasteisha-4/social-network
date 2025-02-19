@@ -74,11 +74,51 @@ export default function Users(props) {
                 />
               </NavLink>
               {user.followed ? (
-                <button onClick={() => props.unfollow(user.id)}>
+                <button
+                  onClick={() => {
+                    fetch(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                      {
+                        method: 'DELETE',
+                        credentials: 'include',
+                        headers: {
+                          'API-KEY': process.env.REACT_APP_API_KEY
+                        }
+                      }
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        if (!data.resultCode) {
+                          props.unfollow(user.id);
+                        }
+                      });
+                  }}
+                >
                   Unfollow
                 </button>
               ) : (
-                <button onClick={() => props.follow(user.id)}>Follow</button>
+                <button
+                  onClick={() => {
+                    fetch(
+                      `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                      {
+                        method: 'POST',
+                        credentials: 'include',
+                        headers: {
+                          'API-KEY': process.env.REACT_APP_API_KEY
+                        }
+                      }
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        if (!data.resultCode) {
+                          props.follow(user.id);
+                        }
+                      });
+                  }}
+                >
+                  Follow
+                </button>
               )}
             </div>
             <div>
