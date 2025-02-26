@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { getMe } from '../../api/api';
 import { setAuthUserData } from '../../redux/authReducer';
 import Header from './Header';
 
 const HeaderContainer = (props) => {
   useEffect(() => {
-    fetch(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-      credentials: 'include'
-    })
-      .then((response) => response.json())
+    getMe()
       .then((data) => {
         if (data.resultCode === 0) {
           const { id, login, email } = data.data;

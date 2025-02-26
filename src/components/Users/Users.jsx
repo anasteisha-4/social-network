@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { follow, unfollow } from '../../api/api';
 import defaultAvatar from '../../images/default.jpg';
 import s from './Users.module.css';
 
@@ -76,22 +77,11 @@ export default function Users(props) {
               {user.followed ? (
                 <button
                   onClick={() => {
-                    fetch(
-                      `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                      {
-                        method: 'DELETE',
-                        credentials: 'include',
-                        headers: {
-                          'API-KEY': process.env.REACT_APP_API_KEY
-                        }
+                    unfollow(user.id).then((data) => {
+                      if (!data.resultCode) {
+                        props.unfollow(user.id);
                       }
-                    )
-                      .then((response) => response.json())
-                      .then((data) => {
-                        if (!data.resultCode) {
-                          props.unfollow(user.id);
-                        }
-                      });
+                    });
                   }}
                 >
                   Unfollow
@@ -99,22 +89,11 @@ export default function Users(props) {
               ) : (
                 <button
                   onClick={() => {
-                    fetch(
-                      `https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                      {
-                        method: 'POST',
-                        credentials: 'include',
-                        headers: {
-                          'API-KEY': process.env.REACT_APP_API_KEY
-                        }
+                    follow(user.id).then((data) => {
+                      if (!data.resultCode) {
+                        props.follow(user.id);
                       }
-                    )
-                      .then((response) => response.json())
-                      .then((data) => {
-                        if (!data.resultCode) {
-                          props.follow(user.id);
-                        }
-                      });
+                    });
                   }}
                 >
                   Follow

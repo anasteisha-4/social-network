@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { getUsers } from '../../api/api';
 import {
   follow,
   setCurrentPage,
@@ -24,13 +25,7 @@ const UsersContainer = (props) => {
   useEffect(() => {
     if (initialized) {
       props.toggleIsFetching(true);
-      fetch(
-        `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${props.currentPage}`,
-        {
-          credentials: 'include'
-        }
-      )
-        .then((response) => response.json())
+      getUsers(props.pageSize, props.currentPage)
         .then((value) => {
           props.setUsers(value.items);
           props.setTotalUsersCount(value.totalCount);
@@ -42,13 +37,7 @@ const UsersContainer = (props) => {
 
   const changePage = (page) => {
     props.toggleIsFetching(true);
-    fetch(
-      `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${page}`,
-      {
-        credentials: 'include'
-      }
-    )
-      .then((response) => response.json())
+    getUsers(props.pageSize, page)
       .then((value) => {
         props.setUsers(value.items);
         props.setCurrentPage(page);

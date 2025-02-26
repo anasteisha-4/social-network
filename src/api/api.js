@@ -1,0 +1,48 @@
+const BASE_URL = 'https://social-network.samuraijs.com/api/1.0';
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+export const getUsers = async (pageSize = 10, currentPage = 1) => {
+  const response = await fetch(
+    `${BASE_URL}/users?count=${pageSize}&page=${currentPage}`,
+    {
+      credentials: 'include'
+    }
+  );
+  return await response.json();
+};
+
+export const getProfile = async (
+  id = getMe().then((value) => value.data.id)
+) => {
+  const response = await fetch(`${BASE_URL}/profile/${id}`);
+  return await response.json();
+};
+
+export const getMe = async () => {
+  const response = await fetch(`${BASE_URL}/auth/me`, {
+    credentials: 'include'
+  });
+  return response.json();
+};
+
+export const follow = async (id) => {
+  const response = await fetch(`${BASE_URL}/follow/${id}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'API-KEY': API_KEY
+    }
+  });
+  return await response.json();
+};
+
+export const unfollow = async (id) => {
+  const response = await fetch(`${BASE_URL}/follow/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      'API-KEY': API_KEY
+    }
+  });
+  return await response.json();
+};
