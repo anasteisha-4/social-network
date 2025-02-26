@@ -10,14 +10,16 @@ export const updateNewMessageText = (text) => ({
 
 const initialState = {
   users: [
-    { id: 1, name: 'Anastasia' },
-    { id: 2, name: 'Bogdan' },
-    { id: 3, name: 'Polly' }
+    { id: 1, name: 'Maria' },
+    { id: 2, name: 'Victoria' },
+    { id: 3, name: 'Kirill' }
   ],
 
   messages: [
-    { id: 1, text: 'Доброе утро ❤️', from: 'user' },
-    { id: 2, text: 'Доброе утро ❤️', from: 'me' }
+    { id: 1, text: 'Привет, ты дома?', from: 'user' },
+    { id: 2, text: 'Привет, да', from: 'me' },
+    { id: 3, text: 'Зайду через 10 минут', from: 'user' },
+    { id: 4, text: 'Хорошо', from: 'me' }
   ],
 
   newMessageText: ''
