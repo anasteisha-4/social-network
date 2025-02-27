@@ -6,9 +6,10 @@ import {
   setCurrentPage,
   setTotalUsersCount,
   setUsers,
+  toggleFollowingInProgress,
   toggleIsFetching,
   unfollow
-} from '../../redux/usersReduces';
+} from '../../redux/usersReducer';
 import Preloader from '../Preloader/Preloader';
 import Users from './Users';
 
@@ -59,7 +60,8 @@ const mapStateToProps = (state) => {
     pageSize: state.users.pageSize,
     totalUsersCount: state.users.totalUsersCount,
     currentPage: state.users.currentPage,
-    isFetching: state.users.isFetching
+    isFetching: state.users.isFetching,
+    followingInProgress: state.users.followingInProgress
   };
 };
 
@@ -69,5 +71,6 @@ export default connect(mapStateToProps, {
   setUsers,
   setTotalUsersCount,
   setCurrentPage,
-  toggleIsFetching
+  toggleIsFetching,
+  toggleFollowingInProgress
 })(UsersContainer);

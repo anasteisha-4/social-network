@@ -3,7 +3,7 @@ import authReducer from './authReducer';
 import messagesReducer from './messagesReducer';
 import profileReducer from './profileReducer';
 import sidebarReducer from './sidebarReducer';
-import usersReducer from './usersReduces';
+import usersReducer from './usersReducer';
 
 const reducer = {
   profile: profileReducer,

@@ -42,6 +42,13 @@
   width: 6em;
 }
 
+.item button:disabled {
+  background-color: rgb(149, 149, 149);
+  color: white;
+  border: 2px solid black;
+  pointer-events: none;
+}
+
 .item h4,
 .item p {
   padding: 0;

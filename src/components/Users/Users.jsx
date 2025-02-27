@@ -76,11 +76,16 @@ export default function Users(props) {
               </NavLink>
               {user.followed ? (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )}
                   onClick={() => {
+                    props.toggleFollowingInProgress(true, user.id);
                     unfollow(user.id).then((data) => {
                       if (!data.resultCode) {
                         props.unfollow(user.id);
                       }
+                      props.toggleFollowingInProgress(false, user.id);
                     });
                   }}
                 >
@@ -88,11 +93,16 @@ export default function Users(props) {
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.some(
+                    (id) => id === user.id
+                  )}
                   onClick={() => {
+                    props.toggleFollowingInProgress(true, user.id);
                     follow(user.id).then((data) => {
                       if (!data.resultCode) {
                         props.follow(user.id);
                       }
+                      props.toggleFollowingInProgress(false, user.id);
                     });
                   }}
                 >
