@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { follow, unfollow } from '../../api/api';
 import defaultAvatar from '../../images/default.jpg';
 import s from './Users.module.css';
 
@@ -80,13 +78,7 @@ export default function Users(props) {
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.toggleFollowingInProgress(true, user.id);
-                    unfollow(user.id).then((data) => {
-                      if (!data.resultCode) {
-                        props.unfollow(user.id);
-                      }
-                      props.toggleFollowingInProgress(false, user.id);
-                    });
+                    props.unfollow(user.id);
                   }}
                 >
                   Unfollow
@@ -97,13 +89,7 @@ export default function Users(props) {
                     (id) => id === user.id
                   )}
                   onClick={() => {
-                    props.toggleFollowingInProgress(true, user.id);
-                    follow(user.id).then((data) => {
-                      if (!data.resultCode) {
-                        props.follow(user.id);
-                      }
-                      props.toggleFollowingInProgress(false, user.id);
-                    });
+                    props.follow(user.id);
                   }}
                 >
                   Follow
