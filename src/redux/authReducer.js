@@ -22,7 +22,7 @@ export default function authReducer(state = initialState, action) {
   }
 }
 
-export const setAuthUserData = (id, email, login) => ({
+const setAuthUserData = (id, email, login) => ({
   type: SET_AUTH_USER_DATA,
   data: {
     id,
@@ -38,8 +38,6 @@ export const getMe = () => {
         if (data.resultCode === 0) {
           const { id, login, email } = data.data;
           dispatch(setAuthUserData(id, email, login));
-        } else {
-          alert('You are not authorized');
         }
       })
       .catch((error) => alert(error));

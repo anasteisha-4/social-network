@@ -11,7 +11,7 @@ export const updateNewPostText = (text) => ({
   text
 });
 
-export const setUserProfile = (profile) => ({
+const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile
 });
