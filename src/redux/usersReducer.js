@@ -127,7 +127,7 @@ export const unfollow = (id) => {
     dispatch(toggleFollowingInProgress(true, id));
     API.unfollow(id).then((data) => {
       if (!data.resultCode) {
-        dispatch(followSuccess(id));
+        dispatch(unfollowSuccess(id));
       }
       dispatch(toggleFollowingInProgress(false, id));
     });

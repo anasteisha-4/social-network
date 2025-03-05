@@ -1,15 +1,17 @@
+import { compose } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';
+import { withAuthNavigate } from '../../hoc/withAuthNavigate';
 import { sendMessage, updateNewMessageText } from '../../redux/messagesReducer';
 import Messages from './Messages';
 
 const mapStateToProps = (state) => {
   return {
     state: state.messages,
-    isAuth: state.auth.isAuth
   };
 };
 
-export default connect(mapStateToProps, {
+
+export default compose(connect(mapStateToProps, {
   sendMessage,
   updateNewMessageText
-})(Messages);
+}), withAuthNavigate)(Messages);

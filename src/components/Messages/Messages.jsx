@@ -1,6 +1,4 @@
 import React from 'react';
-
-import { Navigate } from 'react-router-dom';
 import Message from './Message/Message';
 import s from './Messages.module.css';
 import User from './User/User';
@@ -13,10 +11,6 @@ export default function Messages(props) {
   const updateNewMessageText = (event) => {
     props.updateNewMessageText(event.target.value);
   };
-
-  if (props.isAuth === false) {
-    return <Navigate to="/login" />;
-  }
 
   return (
     <div className={s.content}>
