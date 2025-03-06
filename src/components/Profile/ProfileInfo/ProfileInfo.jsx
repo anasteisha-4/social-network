@@ -17,9 +17,16 @@ export default function ProfileInfo(props) {
         />
         <div className={s.textInfo}>
           <h1>{profile.fullName}</h1>
-          <ProfileStatus status="I'm learning React" />
+          <ProfileStatus
+            status={props.status}
+            isMyProfile={props.isMyProfile}
+            updateStatus={props.updateStatus}
+          />
           {profile.aboutMe ? (
-            <p className={s.about}>Обо мне: {profile.aboutMe}</p>
+            <p className={s.about}>
+              <span style={{ fontWeight: 'bold' }}> Обо мне:</span>{' '}
+              {profile.aboutMe}
+            </p>
           ) : (
             <></>
           )}
