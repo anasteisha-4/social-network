@@ -1,5 +1,19 @@
+.status {
+  height: 25px;
+  display: flex;
+  align-items: center;
+}
+
 .status p {
   padding: 0;
   margin: 0;
   color: darkblue;
+}
+
+.my-status p:hover {
+  cursor: pointer;
+}
+
+.my-status input {
+  font-size: inherit;
 }

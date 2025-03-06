@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './ProfileStatus.module.css';
 
 export default function ProfileStatus(props) {
@@ -15,8 +15,14 @@ export default function ProfileStatus(props) {
     setStatus(event.currentTarget.value);
   };
 
+  useEffect(() => {
+    if (status !== props.status) {
+      setStatus(props.status);
+    }
+  }, [props.status]);
+
   return (
-    <div className={s.status}>
+    <div className={s.status + (props.isMyProfile ? ' ' + s['my-status'] : '')}>
       {editMode ? (
         <input
           onDoubleClick={toggleEditMode}

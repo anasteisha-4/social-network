@@ -47,7 +47,7 @@ export default function ProfileInfo(props) {
             <div className={s.contacts}>
               <h4>Контакты:</h4>
               {Array.from(Object.entries(profile.contacts)).map((value) => {
-                return value[1] == null ? (
+                return !value[1] ? (
                   <></>
                 ) : (
                   <div key={value[0]}>
