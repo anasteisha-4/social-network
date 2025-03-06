@@ -20,7 +20,10 @@ const ProfileContainer = (props) => {
 
 const mapStateToProps = (state) => ({
   profile: state.profile.profile,
-  myId: state.auth.id,
+  myId: state.auth.id
 });
 
-export default compose(connect(mapStateToProps, { getProfile }), withAuthNavigate)(ProfileContainer);
+export default compose(
+  connect(mapStateToProps, { getProfile }),
+  withAuthNavigate
+)(ProfileContainer);

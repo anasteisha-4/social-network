@@ -2,6 +2,7 @@ import React from 'react';
 import defaultAvatar from '../../../images/default.jpg';
 import Preloader from '../../Preloader/Preloader';
 import s from './ProfileInfo.module.css';
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 export default function ProfileInfo(props) {
   const profile = props.profile;
@@ -9,13 +10,6 @@ export default function ProfileInfo(props) {
     <Preloader />
   ) : (
     <>
-      <div>
-        <img
-          className={s.background}
-          src="https://i.pinimg.com/originals/c0/50/3d/c0503d6c7d61c9a6f0f8eb2752e450e2.jpg"
-          alt="background sea"
-        />
-      </div>
       <div className={s.descriptionBlock}>
         <img
           src={profile.photos?.large || profile.photos?.small || defaultAvatar}
@@ -23,6 +17,7 @@ export default function ProfileInfo(props) {
         />
         <div className={s.textInfo}>
           <h1>{profile.fullName}</h1>
+          <ProfileStatus status="I'm learning React" />
           {profile.aboutMe ? (
             <p className={s.about}>Обо мне: {profile.aboutMe}</p>
           ) : (

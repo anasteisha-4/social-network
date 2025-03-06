@@ -6,12 +6,14 @@ import Messages from './Messages';
 
 const mapStateToProps = (state) => {
   return {
-    state: state.messages,
+    state: state.messages
   };
 };
 
-
-export default compose(connect(mapStateToProps, {
-  sendMessage,
-  updateNewMessageText
-}), withAuthNavigate)(Messages);
+export default compose(
+  connect(mapStateToProps, {
+    sendMessage,
+    updateNewMessageText
+  }),
+  withAuthNavigate
+)(Messages);
