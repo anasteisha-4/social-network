@@ -41,6 +41,19 @@ export const authAPI = {
       credentials: 'include'
     });
     return response.json();
+  },
+
+  async login({ email, password, rememberMe, captcha }) {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'API-KEY': API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password, rememberMe, captcha })
+    });
+    return response.json();
   }
 };
 

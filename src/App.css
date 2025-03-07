@@ -48,3 +48,10 @@ button:hover {
   color: darkblue;
   background-color: white;
 }
+
+button:disabled {
+  background-color: rgb(149, 149, 149);
+  color: white;
+  border: 2px solid black;
+  pointer-events: none;
+}

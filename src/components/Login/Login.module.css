@@ -1,0 +1,78 @@
+.login {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login p {
+  margin: 0;
+}
+
+.login > form {
+  display: flex;
+  width: 300px;
+
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login > form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.login > form > button {
+  margin-top: 5px;
+  align-self: flex-end;
+}
+
+.login input {
+  display: block;
+}
+
+.checkbox {
+  flex-direction: row-reverse !important;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.login input[type='email'],
+.login input[type='password'] {
+  font-size: inherit;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.login > form label {
+  color: darkblue;
+  font-size: 0.7rem;
+}
+
+.login input:not(.input-error) {
+  border: 0.5px solid black;
+}
+
+.input-error {
+  border: 1px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.7rem;
+  word-break: break-all;
+}
+
+.success-log,
+.error-log {
+  margin: 50px !important;
+}
+
+.success-log {
+  color: darkblue;
+}
+
+.error-log {
+  color: red;
+}

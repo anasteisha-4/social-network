@@ -97,13 +97,12 @@ export default function Users(props) {
               )}
             </div>
             <div>
-              <div>
-                <h4>{user.name}</h4>
-                <p className={s.status}>{user.status ?? 'status'}</p>
-              </div>
+              <h4>{user.name}</h4>
+              <p className={s.status}>{user.status ?? ''}&nbsp;</p>
+
               <div className={s.location}>
-                {user.location?.city ?? 'city'},{' '}
-                {user.location?.country ?? 'country'}
+                {user.location?.city ?? ''}
+                {user.location?.country ? `, ${user.location?.country}` : ''}
               </div>
             </div>
           </div>
