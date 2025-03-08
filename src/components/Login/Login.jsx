@@ -1,27 +1,9 @@
-import { Form, Formik, useField } from 'formik';
+import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import * as yup from 'yup';
 import { authAPI } from '../../api/api';
+import { InputField } from '../Form fields/FormFields';
 import s from './Login.module.css';
-
-const FormField = ({ label, ...props }) => {
-  const [field, meta] = useField(props);
-  return (
-    <div className={props.className ? props.className : ''}>
-      <label htmlFor={props.id}>{label}</label>
-      <input
-        {...field}
-        {...props}
-        className={meta.error && meta.touched ? s['input-error'] : ''}
-      />
-      {meta.error && meta.touched ? (
-        <p className={s['error-message']}>{meta.error}</p>
-      ) : (
-        <></>
-      )}
-    </div>
-  );
-};
 
 const LoginForm = () => {
   const [isSubmitted, setSubmitted] = useState(false);
@@ -64,21 +46,21 @@ const LoginForm = () => {
         return (
           <>
             <Form onSubmit={props.handleSubmit}>
-              <FormField
+              <InputField
                 label="Email"
                 id="email"
                 type="email"
                 name="email"
                 placeholder="Email"
               />
-              <FormField
+              <InputField
                 label="Password"
                 id="password"
                 type="password"
                 name="password"
                 placeholder="Password"
               />
-              <FormField
+              <InputField
                 label="Remember me"
                 id="rememberMe"
                 type="checkbox"

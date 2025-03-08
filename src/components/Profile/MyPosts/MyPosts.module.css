@@ -7,7 +7,7 @@
   flex-direction: column-reverse;
 }
 
-.new {
+.new form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -19,6 +19,7 @@
 
 .new h3 {
   margin: 0;
+  margin-bottom: 10px;
   padding: 0;
 }
 

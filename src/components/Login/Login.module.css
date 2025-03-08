@@ -54,16 +54,6 @@
   border: 0.5px solid black;
 }
 
-.input-error {
-  border: 1px solid red;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.7rem;
-  word-break: break-all;
-}
-
 .success-log,
 .error-log {
   margin: 50px !important;

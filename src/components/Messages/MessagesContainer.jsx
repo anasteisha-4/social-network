@@ -1,7 +1,7 @@
 import { compose } from '@reduxjs/toolkit';
 import { connect } from 'react-redux';
 import { withAuthNavigate } from '../../hoc/withAuthNavigate';
-import { sendMessage, updateNewMessageText } from '../../redux/messagesReducer';
+import { sendMessage } from '../../redux/messagesReducer';
 import Messages from './Messages';
 
 const mapStateToProps = (state) => {
@@ -12,8 +12,7 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps, {
-    sendMessage,
-    updateNewMessageText
+    sendMessage
   }),
   withAuthNavigate
 )(Messages);

@@ -18,10 +18,14 @@
 }
 
 .messagesBlock {
+  padding: 10px;
+}
+
+.messagesBlock,
+.messagesBlock form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
 }
 
 .messagesBlock button {

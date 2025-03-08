@@ -1,11 +1,8 @@
 const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
-export const sendMessage = () => ({ type: SEND_MESSAGE });
-
-export const updateNewMessageText = (text) => ({
-  type: UPDATE_NEW_MESSAGE_TEXT,
-  text
+export const sendMessage = (message) => ({
+  type: SEND_MESSAGE,
+  message
 });
 
 const initialState = {
@@ -20,9 +17,7 @@ const initialState = {
     { id: 2, text: 'Привет, да', from: 'me' },
     { id: 3, text: 'Зайду через 10 минут', from: 'user' },
     { id: 4, text: 'Хорошо', from: 'me' }
-  ],
-
-  newMessageText: ''
+  ]
 };
 
 const messagesReducer = (state = initialState, action) => {
@@ -34,16 +29,10 @@ const messagesReducer = (state = initialState, action) => {
           ...state.messages,
           {
             id: Math.max(...state.messages.map((obj) => obj.id)) + 1,
-            text: state.newMessageText,
+            text: action.message,
             from: 'me'
           }
-        ],
-        newMessageText: ''
-      };
-    case UPDATE_NEW_MESSAGE_TEXT:
-      return {
-        ...state,
-        newMessageText: action.text
+        ]
       };
     default:
       return state;
