@@ -1,17 +1,13 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import * as yup from 'yup';
-import { TextAreaField } from '../Form fields/FormFields';
+import { requiredStringSchema } from '../../utils/validators';
+import { TextAreaField } from '../common/Form fields/FormFields';
 import Message from './Message/Message';
 import s from './Messages.module.css';
 import User from './User/User';
 
 const AddMessageForm = (props) => {
   const [isSubmitted, setSubmitted] = useState(false); // will be used later
-
-  const messageSchema = yup.object().shape({
-    message: yup.string().trim().required("Message mustn't be empty")
-  });
 
   const onSubmit = (data, actions) => {
     props.sendMessage(data.message);
@@ -22,7 +18,7 @@ const AddMessageForm = (props) => {
   return (
     <Formik
       initialValues={{ message: '' }}
-      validationSchema={messageSchema}
+      validationSchema={requiredStringSchema('message')}
       onSubmit={onSubmit}
     >
       {(props) => {

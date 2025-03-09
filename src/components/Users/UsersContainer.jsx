@@ -6,7 +6,7 @@ import {
   setCurrentPage,
   unfollow
 } from '../../redux/usersReducer';
-import Preloader from '../Preloader/Preloader';
+import Preloader from '../common/Preloader/Preloader';
 import Users from './Users';
 
 const UsersContainer = (props) => {

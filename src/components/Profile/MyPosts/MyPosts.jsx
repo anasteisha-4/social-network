@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 
 import { Form, Formik } from 'formik';
-import * as yup from 'yup';
-import { TextAreaField } from '../../Form fields/FormFields';
+import { requiredStringSchema } from '../../../utils/validators';
+import { TextAreaField } from '../../common/Form fields/FormFields';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 const NewPostForm = (props) => {
   const [isSubmitted, setSubmitted] = useState(false); // will be used later
-
-  const newPostSchema = yup.object().shape({
-    text: yup.string().trim().required("Post mustn't be empty")
-  });
 
   const onSubmit = (data, actions) => {
     props.addPost(data.text);
@@ -22,7 +18,7 @@ const NewPostForm = (props) => {
   return (
     <Formik
       initialValues={{ text: '' }}
-      validationSchema={newPostSchema}
+      validationSchema={requiredStringSchema('text')}
       onSubmit={onSubmit}
     >
       {(props) => {

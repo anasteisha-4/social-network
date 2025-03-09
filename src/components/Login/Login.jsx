@@ -1,21 +1,13 @@
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
-import * as yup from 'yup';
 import { authAPI } from '../../api/api';
-import { InputField } from '../Form fields/FormFields';
+import { loginSchema } from '../../utils/validators';
+import { InputField } from '../common/Form fields/FormFields';
 import s from './Login.module.css';
 
 const LoginForm = () => {
   const [isSubmitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const formSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email('Enter valid email')
-      .required('Field is required'),
-    password: yup.string().required('Field is required')
-  });
 
   const onSubmit = (formData, actions) => {
     authAPI
@@ -39,7 +31,7 @@ const LoginForm = () => {
         password: '',
         rememberMe: false
       }}
-      validationSchema={formSchema}
+      validationSchema={loginSchema}
       onSubmit={onSubmit}
     >
       {(props) => {
