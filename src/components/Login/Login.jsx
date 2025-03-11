@@ -1,27 +1,16 @@
 import { Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { authAPI } from '../../api/api';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { login } from '../../redux/authReducer';
 import { loginSchema } from '../../utils/validators';
 import { InputField } from '../common/Form fields/FormFields';
 import s from './Login.module.css';
 
-const LoginForm = () => {
-  const [isSubmitted, setSubmitted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
+const LoginForm = (props) => {
   const onSubmit = (formData, actions) => {
-    authAPI
-      .login(formData)
-      .then((data) => {
-        if (!data.resultCode) {
-          setErrorMessage('');
-          setSubmitted(true);
-        } else {
-          throw data.messages[0];
-        }
-      })
-      .catch((error) => setErrorMessage(error.toString()))
-      .finally(() => actions.resetForm());
+    props.login(formData);
+    actions.resetForm();
   };
 
   return (
@@ -34,10 +23,10 @@ const LoginForm = () => {
       validationSchema={loginSchema}
       onSubmit={onSubmit}
     >
-      {(props) => {
+      {(selfProps) => {
         return (
           <>
-            <Form onSubmit={props.handleSubmit}>
+            <Form onSubmit={selfProps.handleSubmit}>
               <InputField
                 label="Email"
                 id="email"
@@ -60,14 +49,14 @@ const LoginForm = () => {
                 className={s.checkbox}
               />
 
-              <button type="submit" disabled={props.isSubmitting}>
+              <button type="submit" disabled={selfProps.isSubmitting}>
                 Login
               </button>
             </Form>
-            {isSubmitted ? (
+            {props.loginSubmitted ? (
               <p className={s['success-log']}>You logged successfully!</p>
-            ) : errorMessage ? (
-              <p className={s['error-log']}>{errorMessage}</p>
+            ) : props.errorMessage ? (
+              <p className={s['error-log']}>{props.errorMessage}</p>
             ) : (
               <></>
             )}
@@ -78,11 +67,22 @@ const LoginForm = () => {
   );
 };
 
-export default function Login(props) {
+const Login = (props) => {
+  if (props.isAuth) {
+    return <Navigate to="/profile" />;
+  }
   return (
     <div className={s.login}>
       <h1>Login</h1>
-      <LoginForm />
+      <LoginForm {...props} />
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+  errorMessage: state.auth.errorMessage,
+  loginSubmitted: state.auth.loginSubmitted
+});
+
+export default connect(mapStateToProps, { login })(Login);

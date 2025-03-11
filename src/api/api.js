@@ -43,7 +43,7 @@ export const authAPI = {
     return response.json();
   },
 
-  async login({ email, password, rememberMe, captcha }) {
+  async login({ email, password, rememberMe = false, captcha }) {
     const response = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       credentials: 'include',
@@ -54,6 +54,17 @@ export const authAPI = {
       body: JSON.stringify({ email, password, rememberMe, captcha })
     });
     return response.json();
+  },
+
+  async logout() {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: {
+        'API-KEY': API_KEY
+      }
+    });
+    return await response.json();
   }
 };
 
